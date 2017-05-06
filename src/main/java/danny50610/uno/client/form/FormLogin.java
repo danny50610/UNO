@@ -13,4 +13,8 @@ public class FormLogin {
     private JButton loginButton;
     private JLabel passwordLabel;
     private JLabel usernameLabel;
+
+    public JPanel getPanel1() {
+        return this.panel1;
+    }
 }

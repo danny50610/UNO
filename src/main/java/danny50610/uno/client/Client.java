@@ -13,13 +13,14 @@ public class Client {
     }
 
     public Client() {
-        this.run();
+        //
     }
 
     public void run() {
         JFrame frame = new JFrame("UNO");
         frame.setContentPane(new FormLogin().getPanel1());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
     }

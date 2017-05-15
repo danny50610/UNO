@@ -1,4 +1,4 @@
-package danny50610.uno.client.form;
+package club.dannyserver.uno.client.form;
 
 import javax.swing.*;
 

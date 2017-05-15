@@ -1,7 +1,7 @@
-package danny50610.uno.client;
+package club.dannyserver.uno.client;
 
 
-import danny50610.uno.client.form.FormLogin;
+import club.dannyserver.uno.client.form.FormLogin;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package club.dannyserver.common;
+package club.dannyserver.uno.common;
 
 /**
  *  UNO 卡片

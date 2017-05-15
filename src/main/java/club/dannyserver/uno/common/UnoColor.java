@@ -1,4 +1,4 @@
-package club.dannyserver.common;
+package club.dannyserver.uno.common;
 
 /**
  * 表示 UNO 卡片的顏色

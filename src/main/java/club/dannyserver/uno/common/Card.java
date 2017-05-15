@@ -1,7 +1,7 @@
 package club.dannyserver.uno.common;
 
 /**
- *  UNO 卡片
+ * UNO 卡片
  */
 public class Card {
 

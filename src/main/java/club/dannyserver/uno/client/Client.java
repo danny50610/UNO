@@ -17,7 +17,7 @@ public class Client {
     }
 
     public void run() {
-        JFrame frame = new JFrame("UNO");
+        JFrame frame = new JFrame("UNO Login");
         frame.setContentPane(new FormLogin().getPanel1());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);

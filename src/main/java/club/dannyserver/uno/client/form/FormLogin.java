@@ -2,11 +2,8 @@ package club.dannyserver.uno.client.form;
 
 import javax.swing.*;
 
-/**
- * Created by danny50610 on 2017/5/6.
- */
 public class FormLogin {
-    private JPanel panel1;
+    private JPanel mainPanel;
     private JTextField usernameTextField;
     private JPasswordField passwordField;
     private JButton registerButton;
@@ -15,7 +12,7 @@ public class FormLogin {
     private JLabel usernameLabel;
     private JLabel message;
 
-    public JPanel getPanel1() {
-        return this.panel1;
+    public JPanel getMainPanel() {
+        return this.mainPanel;
     }
 }

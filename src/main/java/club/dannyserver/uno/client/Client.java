@@ -2,6 +2,7 @@ package club.dannyserver.uno.client;
 
 
 import club.dannyserver.uno.client.form.FormLogin;
+import club.dannyserver.uno.client.form.FormRegister;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class Client {
 
     public void run() {
         JFrame frame = new JFrame("UNO Login");
-        frame.setContentPane(new FormLogin().getPanel1());
+        frame.setContentPane(new FormLogin().getMainPanel());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.pack();

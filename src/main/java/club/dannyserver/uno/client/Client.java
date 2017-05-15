@@ -10,20 +10,19 @@ import java.net.Socket;
 public class Client {
 
     public static void main(String[] args) {
-        // Test
+        Client client = null;
         try {
-            Socket socket = new Socket("127.0.0.1", 25560);
-
-        } catch (IOException e) {
+            client = new Client("127.0.0.1", 25560);
+            client.run();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Client client = new Client();
-        client.run();
     }
 
-    public Client() {
-        //
+    private final Socket socket;
+
+    public Client(String ip, int port) throws Exception {
+        this.socket = new Socket(ip, port);
     }
 
     public void run() {

@@ -46,6 +46,7 @@ public class Client {
         loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         loginFrame.setResizable(false);
         loginFrame.pack();
+        loginFrame.setLocationRelativeTo(null);
     }
 
     private void initRegisterFrame() {
@@ -54,6 +55,7 @@ public class Client {
         registerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         registerFrame.setResizable(false);
         registerFrame.pack();
+        registerFrame.setLocationRelativeTo(null);
     }
 
     public void run() {

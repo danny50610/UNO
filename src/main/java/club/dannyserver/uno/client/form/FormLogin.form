@@ -41,6 +41,8 @@
             </constraints>
             <properties>
               <background color="-13012248"/>
+              <foreground color="-1"/>
+              <hideActionText value="true"/>
               <text value="Login"/>
             </properties>
           </component>

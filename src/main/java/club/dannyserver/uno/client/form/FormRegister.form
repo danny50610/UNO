@@ -93,6 +93,7 @@
             <properties>
               <background color="-13012248"/>
               <enabled value="true"/>
+              <foreground color="-1"/>
               <text value="Register"/>
             </properties>
           </component>

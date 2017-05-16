@@ -27,6 +27,8 @@ public class Client {
 
     private final Socket socket;
 
+    private JFrame activeFrame;
+
     private JFrame loginFrame;
 
     private JFrame registerFrame;
@@ -40,7 +42,7 @@ public class Client {
 
     private void initLoginFrame() {
         loginFrame = new JFrame("UNO Login");
-        loginFrame.setContentPane(new FormLogin().getMainPanel());
+        loginFrame.setContentPane(new FormLogin(this).getMainPanel());
         loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         loginFrame.setResizable(false);
         loginFrame.pack();
@@ -48,14 +50,15 @@ public class Client {
 
     private void initRegisterFrame() {
         registerFrame = new JFrame("UNO Register");
-        registerFrame.setContentPane(new FormRegister().getMainPanel());
+        registerFrame.setContentPane(new FormRegister(this).getMainPanel());
         registerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         registerFrame.setResizable(false);
         registerFrame.pack();
     }
 
     public void run() {
-        loginFrame.setVisible(true);
+        this.activeFrame = loginFrame;
+        this.activeFrame.setVisible(true);
     }
 
     public void close() {
@@ -64,6 +67,18 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void switchToLoginFrame() {
+        activeFrame.setVisible(false);
+        this.activeFrame = loginFrame;
+        this.activeFrame.setVisible(true);
+    }
+
+    public void switchToRegisterFrame() {
+        activeFrame.setVisible(false);
+        this.activeFrame = registerFrame;
+        this.activeFrame.setVisible(true);
     }
 
 }

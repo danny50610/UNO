@@ -34,6 +34,7 @@ public class PacketLogin implements IPacket {
 
     @Override
     public void serverHandler(Server server) {
+        // TODO:
         System.out.println(username + " " + password);
     }
 

@@ -23,7 +23,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <text value="Username"/>
             </properties>
           </component>
           <component id="20478" class="javax.swing.JTextField" binding="textField1" default-binding="true">
@@ -55,7 +55,7 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <text value="Password"/>
             </properties>
           </component>
           <component id="581dc" class="javax.swing.JLabel">
@@ -65,7 +65,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <text value="Password (again)"/>
             </properties>
           </component>
         </children>

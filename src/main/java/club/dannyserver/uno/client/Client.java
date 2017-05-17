@@ -3,8 +3,11 @@ package club.dannyserver.uno.client;
 
 import club.dannyserver.uno.client.form.FormLogin;
 import club.dannyserver.uno.client.form.FormRegister;
+import club.dannyserver.uno.common.packet.IPacket;
+import club.dannyserver.uno.common.packet.PacketLogin;
 
 import javax.swing.*;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -18,14 +21,10 @@ public class Client {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        finally {
-            if (client != null) {
-                client.close();
-            }
-        }
     }
 
     private final Socket socket;
+    private final DataOutputStream dataOutputStream;
 
     private JFrame activeFrame;
 
@@ -35,6 +34,8 @@ public class Client {
 
     public Client(String ip, int port) throws Exception {
         this.socket = new Socket(ip, port);
+        this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        socket.getInputStream();
 
         initLoginFrame();
         initRegisterFrame();
@@ -83,4 +84,13 @@ public class Client {
         this.activeFrame.setVisible(true);
     }
 
+    public void sendLogin(String username, String password) {
+        IPacket packet = new PacketLogin(username, password);
+
+        try {
+            packet.writeToStream(dataOutputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

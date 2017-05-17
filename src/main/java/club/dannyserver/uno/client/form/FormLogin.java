@@ -26,6 +26,9 @@ public class FormLogin {
 
     private void addListener() {
         this.registerButton.addActionListener(e -> client.switchToRegisterFrame());
+        this.loginButton.addActionListener(
+                e -> client.sendLogin(usernameTextField.getText(), String.valueOf(passwordField.getPassword()))
+        );
     }
 
     public JPanel getMainPanel() {

@@ -1,5 +1,7 @@
 package club.dannyserver.uno.server;
 
+import club.dannyserver.uno.common.User;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -40,6 +42,7 @@ public class ServerSocketHandler implements Runnable {
         @Override
         public void run(Server server) {
             System.out.println("AcceptHandler: " + socket);
+            server.addUser(socket);
         }
     }
 }

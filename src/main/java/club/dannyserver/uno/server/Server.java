@@ -1,7 +1,10 @@
 package club.dannyserver.uno.server;
 
+import club.dannyserver.uno.common.User;
+
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -48,6 +51,16 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static int UserId = 1;
+
+    public void addUser(Socket socket) {
+        User user = new User(UserId, socket);
+        UserId++;
+
+        SocketReadHandler socketReadHandler = new SocketReadHandler(queue, user);
+        new Thread(socketReadHandler, "SocketReadHandlerThread : " + user.id).start();
     }
 
 }

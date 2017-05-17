@@ -23,22 +23,22 @@ public class Server {
 
     private final ServerSocket serverSocket;
 
-    private final BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
+    private final BlockingQueue<IJob> queue = new LinkedBlockingQueue<>();
 
     public Server(int port) throws Exception {
         this.serverSocket = new ServerSocket(port);
     }
 
     public void run() throws Exception {
-        AcceptHandler acceptHandler = new AcceptHandler(queue, this.serverSocket);
+        ServerSocketHandler serverSocketHandler = new ServerSocketHandler(queue, this.serverSocket);
 
-        Thread acceptThread = new Thread(acceptHandler, "AcceptThread");
-        acceptThread.start();
+        new Thread(serverSocketHandler, "ServerSocketHandlerThread").start();
 
+        System.out.println("Server started...");
         while (true) {
-            Runnable runnable = queue.take();
-            System.out.println("Get a runnable");
-            runnable.run();
+            IJob job = queue.take();
+            System.out.println("Run a runnable");
+            job.run(this);
         }
     }
 

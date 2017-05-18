@@ -26,7 +26,7 @@ public class ServerSocketHandler implements Runnable {
                 server.addJob(server -> {
                     System.out.println("AcceptHandler: " + socket);
 
-                    SocketReadHandler socketReadHandler = new SocketReadHandler(server, socket);
+                    SocketReadHandler socketReadHandler = new SocketReadHandler(server, new User(socket));
                     new Thread(socketReadHandler, "SocketReadHandlerThread : " + socket).start();
                 });
             }

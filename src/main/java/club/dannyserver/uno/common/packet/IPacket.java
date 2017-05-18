@@ -1,5 +1,6 @@
 package club.dannyserver.uno.common.packet;
 
+import club.dannyserver.uno.common.User;
 import club.dannyserver.uno.server.Server;
 
 import java.io.DataInputStream;
@@ -11,6 +12,6 @@ public interface IPacket {
 
     public void writeToStream(DataOutputStream dataOutputStream) throws IOException;
 
-    public void serverHandler(Server server);
+    public void serverHandler(Server server, User user);
 
 }

@@ -1,5 +1,6 @@
 package club.dannyserver.uno.common.packet;
 
+import club.dannyserver.uno.common.User;
 import club.dannyserver.uno.server.Server;
 
 import java.io.DataInputStream;
@@ -33,8 +34,8 @@ public class PacketLogin implements IPacket {
     }
 
     @Override
-    public void serverHandler(Server server) {
-        server.login(this.username, this.password);
+    public void serverHandler(Server server, User user) {
+        server.login(user, this.username, this.password);
     }
 
 }

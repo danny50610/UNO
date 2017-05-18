@@ -57,8 +57,8 @@ public class Server {
         this.queue.add(job);
     }
 
-    public void login(String username, String password) {
-
+    public void login(User user, String username, String password) {
+        // TODO
     }
 
 

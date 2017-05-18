@@ -6,23 +6,22 @@ import club.dannyserver.uno.common.packet.PacketManager;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.net.Socket;
 
 public class SocketReadHandler implements Runnable {
 
     private final Server server;
 
-    private final Socket socket;
+    private final User user;
 
-    public SocketReadHandler(Server server, Socket socket) {
+    public SocketReadHandler(Server server, User user) {
         this.server = server;
-        this.socket = socket;
+        this.user = user;
     }
 
     @Override
     public void run() {
         try {
-            DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+            DataInputStream dataInputStream = new DataInputStream(user.socket.getInputStream());
 
             while (true) {
                 int packetId = dataInputStream.read();
@@ -34,7 +33,7 @@ public class SocketReadHandler implements Runnable {
                 IPacket packet = PacketManager.getPacket(packetId);
                 packet.readFromStream(dataInputStream);
 
-                this.server.addJob(server -> packet.serverHandler(server));
+                this.server.addJob(server -> packet.serverHandler(server, user));
             }
         } catch (IOException e) {
             e.printStackTrace();

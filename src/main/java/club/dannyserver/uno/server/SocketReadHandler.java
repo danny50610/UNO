@@ -7,17 +7,16 @@ import club.dannyserver.uno.common.packet.PacketManager;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Queue;
 
 public class SocketReadHandler implements Runnable {
 
-    private final Queue<IJob> queue;
+    private final Server server;
 
     private final Socket socket;
 
-    public SocketReadHandler(Queue<IJob> queue, User user) {
-        this.queue = queue;
-        this.socket = user.socket;
+    public SocketReadHandler(Server server, Socket socket) {
+        this.server = server;
+        this.socket = socket;
     }
 
     @Override
@@ -35,7 +34,7 @@ public class SocketReadHandler implements Runnable {
                 IPacket packet = PacketManager.getPacket(packetId);
                 packet.readFromStream(dataInputStream);
 
-                queue.add(new ReceivePacketHandler(packet));
+                this.server.addJob(server -> packet.serverHandler(server));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,19 +44,5 @@ public class SocketReadHandler implements Runnable {
 
         // TODO: 斷線處理
         System.out.println("Connect Closed.");
-    }
-
-    public static class ReceivePacketHandler implements IJob {
-
-        private IPacket packet;
-
-        public ReceivePacketHandler(IPacket packet) {
-            this.packet = packet;
-        }
-
-        @Override
-        public void run(Server server) {
-            packet.serverHandler(server);
-        }
     }
 }

@@ -33,7 +33,7 @@ public class Server {
     }
 
     public void run() throws Exception {
-        ServerSocketHandler serverSocketHandler = new ServerSocketHandler(queue, this.serverSocket);
+        ServerSocketHandler serverSocketHandler = new ServerSocketHandler(this, this.serverSocket);
 
         new Thread(serverSocketHandler, "ServerSocketHandlerThread").start();
 
@@ -53,14 +53,14 @@ public class Server {
         }
     }
 
-    private static int UserId = 1;
-
-    public void addUser(Socket socket) {
-        User user = new User(UserId, socket);
-        UserId++;
-
-        SocketReadHandler socketReadHandler = new SocketReadHandler(queue, user);
-        new Thread(socketReadHandler, "SocketReadHandlerThread : " + user.id).start();
+    public void addJob(IJob job) {
+        this.queue.add(job);
     }
+
+    public void login(String username, String password) {
+
+    }
+
+
 
 }

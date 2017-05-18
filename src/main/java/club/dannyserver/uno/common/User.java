@@ -4,14 +4,17 @@ import java.net.Socket;
 
 public class User {
 
-    public final int id;
-
     public final Socket socket;
 
-    private String name;
+    private String username;
 
-    public User(int id, Socket socket) {
-        this.id = id;
+    private String password;
+
+    public User(Socket socket) {
         this.socket = socket;
+    }
+
+    public boolean login(String password) {
+        return this.password.equals(password);
     }
 }

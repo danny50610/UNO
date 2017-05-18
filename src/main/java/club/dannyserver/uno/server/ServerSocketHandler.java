@@ -9,12 +9,12 @@ import java.util.Queue;
 
 public class ServerSocketHandler implements Runnable {
 
-    private final Queue<IJob> queue;
+    private final Server server;
 
     private final ServerSocket serverSocket;
 
-    public ServerSocketHandler(Queue<IJob> queue, ServerSocket serverSocket) {
-        this.queue = queue;
+    public ServerSocketHandler(Server server, ServerSocket serverSocket) {
+        this.server = server;
         this.serverSocket = serverSocket;
     }
 
@@ -23,7 +23,12 @@ public class ServerSocketHandler implements Runnable {
         try {
             while (true) {
                 Socket socket = this.serverSocket.accept();
-                queue.add(new AcceptHandler(socket));
+                server.addJob(server -> {
+                    System.out.println("AcceptHandler: " + socket);
+
+                    SocketReadHandler socketReadHandler = new SocketReadHandler(server, socket);
+                    new Thread(socketReadHandler, "SocketReadHandlerThread : " + socket).start();
+                });
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -31,18 +36,4 @@ public class ServerSocketHandler implements Runnable {
 
     }
 
-    public static class AcceptHandler implements IJob {
-
-        private Socket socket;
-
-        public AcceptHandler(Socket socket) {
-            this.socket = socket;
-        }
-
-        @Override
-        public void run(Server server) {
-            System.out.println("AcceptHandler: " + socket);
-            server.addUser(socket);
-        }
-    }
 }

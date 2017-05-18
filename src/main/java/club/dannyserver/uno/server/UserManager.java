@@ -1,5 +1,17 @@
 package club.dannyserver.uno.server;
 
+import club.dannyserver.uno.common.User;
+
+import java.io.File;
+
 public class UserManager {
-    private static int UserId = 1;
+
+    public UserManager(File userFile) {
+        // load user
+    }
+
+//    public boolean login(User user) {
+//
+//    }
+
 }

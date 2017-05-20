@@ -10,9 +10,11 @@ public abstract class PacketManager {
     static {
         // client -> server
         packetMap.put(1, PacketLogin.class);
+        packetMap.put(2, PacketRegister.class);
 
         // server -> client
         packetMap.put(64, PacketLoginResult.class);
+        packetMap.put(65, PacketRegisterResult.class);
     }
 
     public static IPacket getPacket(int packetId) {

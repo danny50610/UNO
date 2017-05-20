@@ -5,6 +5,7 @@ import club.dannyserver.uno.client.form.FormLogin;
 import club.dannyserver.uno.client.form.FormRegister;
 import club.dannyserver.uno.common.packet.IPacket;
 import club.dannyserver.uno.common.packet.PacketLogin;
+import club.dannyserver.uno.common.packet.PacketRegister;
 
 import javax.swing.*;
 import java.io.DataOutputStream;
@@ -87,6 +88,16 @@ public class Client {
 
     public void sendLogin(String username, String password) {
         IPacket packet = new PacketLogin(username, password);
+
+        try {
+            packet.writeToStream(dataOutputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendRegister(String username, String password) {
+        IPacket packet = new PacketRegister(username, password);
 
         try {
             packet.writeToStream(dataOutputStream);

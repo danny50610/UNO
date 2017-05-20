@@ -3,16 +3,23 @@ package club.dannyserver.uno.server;
 import club.dannyserver.uno.common.User;
 import club.dannyserver.uno.common.packet.IPacket;
 import club.dannyserver.uno.common.packet.PacketLoginResult;
+import club.dannyserver.uno.common.packet.PacketRegisterResult;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class UserManager {
+
+    private static int USER_ID = 1;
+
+    private String userFilename;
 
     private Map<Integer, User> id2User = new HashMap<>();
 
@@ -27,9 +34,11 @@ public class UserManager {
                 // id,username,password
                 String[] token = line.split(",");
 
-                User user = new User(token[1], token[2]);
-                id2User.put(Integer.valueOf(token[0]), user);
+                User user = new User(token[0], token[1]);
+                id2User.put(USER_ID++, user);
             }
+
+            this.userFilename = userFilename;
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
@@ -51,6 +60,21 @@ public class UserManager {
         }
     }
 
+    public IPacket register(String username, String password) {
+        int userId = findUserId(username);
+        User user = id2User.get(userId);
+        if (user != null) {
+            return new PacketRegisterResult(username + "已被使用");
+        }
+
+        user = new User(username, password);
+        id2User.put(USER_ID++, user);
+
+        saveUserList();
+
+        return new PacketRegisterResult("註冊成功，請回登入頁登入");
+    }
+
     private int findUserId(String username) {
         for (Map.Entry<Integer, User> entry : id2User.entrySet()) {
             if (entry.getValue().username.equals(username)) {
@@ -59,6 +83,20 @@ public class UserManager {
         }
 
         return -1;
+    }
+
+    private void saveUserList() {
+        List<String> lines = new ArrayList<>();
+        for (User user : id2User.values()) {
+            lines.add(String.format("%s,%s", user.username, user.password));
+        }
+
+        Path file = Paths.get(userFilename);
+        try {
+            Files.write(file, lines, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

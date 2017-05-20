@@ -4,11 +4,11 @@ import java.net.Socket;
 
 public class User {
 
-    public  Socket socket;
+    public Socket socket;
 
     public String username;
 
-    private String password;
+    public String password;
 
     public User(String username, String password) {
         this.username = username;

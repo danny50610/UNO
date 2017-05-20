@@ -28,14 +28,15 @@ public class Client {
 
     private JFrame activeFrame;
 
-    private JFrame loginFrame;
+    public JFrame loginFrame;
 
     private JFrame registerFrame;
 
     public Client(String ip, int port) throws Exception {
         this.socket = new Socket(ip, port);
         this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
-        socket.getInputStream();
+        ClientSocketReadHandler clientSocketReadHandler = new ClientSocketReadHandler(this, socket);
+        new Thread(clientSocketReadHandler, "ClientSocketReadHandler").start();
 
         initLoginFrame();
         initRegisterFrame();

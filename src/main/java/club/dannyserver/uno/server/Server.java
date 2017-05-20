@@ -1,10 +1,15 @@
 package club.dannyserver.uno.server;
 
 import club.dannyserver.uno.common.User;
+import club.dannyserver.uno.common.packet.IPacket;
 
+import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -28,8 +33,14 @@ public class Server {
 
     private final BlockingQueue<IJob> queue = new LinkedBlockingQueue<>();
 
+    public final UserManager userManager;
+
+    public Map<Integer, Socket> connectId2Socket = new HashMap<>();
+
     public Server(int port) throws Exception {
         this.serverSocket = new ServerSocket(port);
+
+        this.userManager = new UserManager("user.txt");
     }
 
     public void run() throws Exception {
@@ -57,10 +68,19 @@ public class Server {
         this.queue.add(job);
     }
 
-    public void login(User user, String username, String password) {
-        // TODO
+    public void addSocket(int connectId, Socket socket) {
+        connectId2Socket.put(connectId, socket);
     }
 
+    public void sendPacket(int connectId, IPacket packet) {
+        Socket socket = connectId2Socket.get(connectId);
 
+        try {
+            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            packet.writeToStream(dataOutputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

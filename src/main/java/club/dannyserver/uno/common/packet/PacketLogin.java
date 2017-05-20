@@ -1,5 +1,6 @@
 package club.dannyserver.uno.common.packet;
 
+import club.dannyserver.uno.client.Client;
 import club.dannyserver.uno.common.User;
 import club.dannyserver.uno.server.Server;
 
@@ -34,8 +35,17 @@ public class PacketLogin implements IPacket {
     }
 
     @Override
-    public void serverHandler(Server server, User user) {
-        server.login(user, this.username, this.password);
+    public void serverHandler(Server server, int connectId) {
+        IPacket packet = server.userManager.login(username, password);
+
+        server.sendPacket(connectId, packet);
+
+        // TODO: add Room
+    }
+
+    @Override
+    public void clientHandler(Client client) {
+        // nothing
     }
 
 }

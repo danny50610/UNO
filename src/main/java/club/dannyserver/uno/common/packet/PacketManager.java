@@ -8,7 +8,11 @@ public abstract class PacketManager {
     private static Map<Integer, Class<? extends IPacket>> packetMap = new HashMap<>();
 
     static {
+        // client -> server
         packetMap.put(1, PacketLogin.class);
+
+        // server -> client
+        packetMap.put(64, PacketLoginResult.class);
     }
 
     public static IPacket getPacket(int packetId) {

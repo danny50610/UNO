@@ -9,6 +9,8 @@ import java.util.Queue;
 
 public class ServerSocketHandler implements Runnable {
 
+    private static int connectId = 1;
+
     private final Server server;
 
     private final ServerSocket serverSocket;
@@ -26,7 +28,7 @@ public class ServerSocketHandler implements Runnable {
                 server.addJob(server -> {
                     System.out.println("AcceptHandler: " + socket);
 
-                    SocketReadHandler socketReadHandler = new SocketReadHandler(server, new User(socket));
+                    SocketReadHandler socketReadHandler = new SocketReadHandler(server, socket, connectId++);
                     new Thread(socketReadHandler, "SocketReadHandlerThread : " + socket).start();
                 });
             }

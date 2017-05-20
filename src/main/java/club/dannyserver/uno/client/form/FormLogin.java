@@ -3,8 +3,6 @@ package club.dannyserver.uno.client.form;
 import club.dannyserver.uno.client.Client;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class FormLogin {
     private JPanel mainPanel;

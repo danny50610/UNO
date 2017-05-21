@@ -54,12 +54,16 @@ public class FormGame {
                 CARD_HEIGHT + CENTER_SIZE
         };
 
+        // 表示玩家的 index
         private int userIndex;
 
+        // 儲存所有玩家個別的牌數
         private int[] cardCount = new int[4];
 
+        // 位在中央的牌
         private Card centerCard;
 
+        // 玩家手上的牌
         private Card[] cards;
 
         private final Client client;

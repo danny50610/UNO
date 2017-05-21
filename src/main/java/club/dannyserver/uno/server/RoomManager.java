@@ -12,14 +12,28 @@ public class RoomManager {
     public List<Room> rooms = new ArrayList<>();
 
     public void addUser(User user) {
-        Room room = rooms.get(rooms.size() - 1);
-
-        if (room.isFull()) {
-            room = new Room();
-            rooms.add(room);
-        }
+        Room room = getLastRoom();
 
         room.addUser(user);
+    }
+
+    private Room getLastRoom() {
+        Room result;
+
+        if (rooms.isEmpty()) {
+            result = new Room();
+            rooms.add(result);
+            return result;
+        }
+
+        result = rooms.get(rooms.size() - 1);
+
+        if (result.isFull()) {
+            result = new Room();
+            rooms.add(result);
+        }
+
+        return result;
     }
 
 }

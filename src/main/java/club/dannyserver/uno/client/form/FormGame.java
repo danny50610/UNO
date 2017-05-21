@@ -60,6 +60,8 @@ public class FormGame {
 
         private Card centerCard;
 
+        private Card[] cards;
+
         private final Client client;
 
         private BufferedImage image;
@@ -86,6 +88,19 @@ public class FormGame {
             this.cardCount[3] = 15;
 
             this.centerCard = new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR);
+
+            this.cards = new Card[]{
+                    new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR),
+                    new Card(UnoColor.BLUE, UnoRank.ZERO),
+                    new Card(UnoColor.GREEN, UnoRank.FOUR),
+                    new Card(UnoColor.YELLOW, UnoRank.FIVE),
+                    new Card(UnoColor.YELLOW, UnoRank.DRAW_TWO),
+                    new Card(UnoColor.RED, UnoRank.REVERSE),
+                    new Card(UnoColor.GREEN, UnoRank.ONE),
+                    new Card(UnoColor.GREEN, UnoRank.THREE),
+                    new Card(UnoColor.GREEN, UnoRank.DRAW_TWO),
+                    new Card(UnoColor.BLACK, UnoRank.WILD),
+            };
             // FIXME: Test code end
         }
 
@@ -100,7 +115,7 @@ public class FormGame {
                     centerCard
             );
 
-            // drawAllBackCard((Graphics2D) g.create(), 3, CARD_HEIGHT, CARD_HEIGHT + CENTER_SIZE, Math.toRadians(0));
+            drawAllCard((Graphics2D) g.create(), startXs[0], startYs[0], this.cards);
             for (int i = 1; i < 4; i++) {
                 int index = (userIndex + i) % 4;
                 drawAllBackCard((Graphics2D) g.create(), cardCount[index], startXs[i], startYs[i], Math.toRadians(i * 90));
@@ -148,6 +163,23 @@ public class FormGame {
                     sourceY2,
                     this
             );
+        }
+
+        private void drawAllCard(Graphics2D g, int startX, int startY, Card[] cards) {
+            double dw = CARD_WIDTH;
+            int totalCardWidth = cards.length * CARD_WIDTH;
+            if (totalCardWidth > CENTER_SIZE) {
+                dw = (CENTER_SIZE - CARD_WIDTH) / (double) (cards.length - 1);
+            }
+
+            for (int i = 0; i < cards.length; i++) {
+                if (totalCardWidth > CENTER_SIZE) {
+                    drawCard(g, (int) (startX + i * dw), startY, cards[i]);
+                }
+                else {
+                    drawCard(g, (int) (startX + i * dw + (CENTER_SIZE - totalCardWidth) / 2), startY, cards[i]);
+                }
+            }
         }
 
         private void drawCard(Graphics2D g, int x, int y, Card card) {

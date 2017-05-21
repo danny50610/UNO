@@ -2,6 +2,8 @@ package club.dannyserver.uno.client.form;
 
 import club.dannyserver.uno.client.Client;
 import club.dannyserver.uno.common.Card;
+import club.dannyserver.uno.common.UnoColor;
+import club.dannyserver.uno.common.UnoRank;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -40,6 +42,8 @@ public class FormGame {
 
         private int[] cardCount = new int[4];
 
+        private Card centerCard;
+
         private final Client client;
 
         private BufferedImage image;
@@ -64,25 +68,27 @@ public class FormGame {
             this.cardCount[1] = 7;
             this.cardCount[2] = 3;
             this.cardCount[3] = 15;
+
+            this.centerCard = new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR);
         }
 
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-            //Graphics2D gCard = (Graphics2D)g;
-//            gCard.scale(SCALE, SCALE);
-
-            // left
-
+            // Center card
+            drawCard((Graphics2D) g.create(),
+                    CARD_HEIGHT + (CENTER_SIZE - CARD_WIDTH) / 2,
+                    CARD_HEIGHT + (CENTER_SIZE - CARD_HEIGHT) / 2,
+                    centerCard
+            );
 
             drawAllBackCard((Graphics2D) g.create(), 3, CARD_HEIGHT, CARD_HEIGHT + CENTER_SIZE, Math.toRadians(0));
             drawAllBackCard((Graphics2D) g.create(), 6, CARD_HEIGHT, CARD_HEIGHT, Math.toRadians(90));
             drawAllBackCard((Graphics2D) g.create(), 16, CARD_HEIGHT + CENTER_SIZE, CARD_HEIGHT, Math.toRadians(180));
             drawAllBackCard((Graphics2D) g.create(), 10, CARD_HEIGHT + CENTER_SIZE, CARD_HEIGHT + CENTER_SIZE, Math.toRadians(270));
 
-            //gCard.rotate(Math.toRadians(45));
-            //gCard.drawImage(image, 0, 0, this);
+            // debug line
             g.drawRect(CARD_HEIGHT, CARD_HEIGHT + CENTER_SIZE, CENTER_SIZE, CARD_HEIGHT);
             g.drawRect(0, CARD_HEIGHT, CARD_HEIGHT, CENTER_SIZE);
             g.drawRect(CARD_HEIGHT, 0, CENTER_SIZE, CARD_HEIGHT);
@@ -112,6 +118,28 @@ public class FormGame {
             int sourceY1 = Card.getCardBackRow() * Card.HEIGHT;
             int sourceX2 = (Card.getCardBackCol() + 1) * Card.WIDTH;
             int sourceY2 = (Card.getCardBackRow() + 1) * Card.HEIGHT;
+
+            g.drawImage(image,
+                    x,
+                    y,
+                    x + CARD_WIDTH,
+                    y + CARD_HEIGHT,
+                    sourceX1,
+                    sourceY1,
+                    sourceX2,
+                    sourceY2,
+                    this
+            );
+        }
+
+        private void drawCard(Graphics2D g, int x, int y, Card card) {
+            int r = card.getCardRow();
+            int c = card.getCardCol();
+
+            int sourceX1 = c * Card.WIDTH;
+            int sourceY1 = r * Card.HEIGHT;
+            int sourceX2 = (c + 1) * Card.WIDTH;
+            int sourceY2 = (r + 1) * Card.HEIGHT;
 
             g.drawImage(image,
                     x,

@@ -25,4 +25,12 @@ public class Card {
     public static int getCardBackCol() {
         return 15;
     }
+
+    public int getCardRow() {
+        return color.getRow();
+    }
+
+    public int getCardCol() {
+        return rank.getCol();
+    }
 }

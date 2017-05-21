@@ -8,5 +8,11 @@ public enum UnoColor {
     GREEN,
     BLUE,
     YELLOW,
-    BLACK
+    BLACK;
+
+    private int[] rowTable = new int[] {0, 2, 3, 1, 0};
+
+    public int getRow() {
+        return rowTable[ordinal()];
+    }
 }

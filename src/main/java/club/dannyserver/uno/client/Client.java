@@ -29,9 +29,13 @@ public class Client {
 
     private JFrame activeFrame;
 
-    public JFrame loginFrame;
+    private JFrame loginFrame;
 
     private JFrame registerFrame;
+
+    public JFrame getActiveFrame() {
+        return this.activeFrame;
+    }
 
     public Client(String ip, int port) throws Exception {
         this.socket = new Socket(ip, port);

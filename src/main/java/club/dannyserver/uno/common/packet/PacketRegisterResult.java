@@ -38,7 +38,7 @@ public class PacketRegisterResult implements IPacket {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 JOptionPane.showMessageDialog(
-                        client.loginFrame,
+                        client.getActiveFrame(),
                         message,
                         "test",
                         JOptionPane.INFORMATION_MESSAGE

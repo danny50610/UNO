@@ -33,7 +33,7 @@ public class FormRegister {
             }
             else {
                 JOptionPane.showMessageDialog(
-                        client.loginFrame,
+                        client.getActiveFrame(),
                         "兩次密碼不一樣，請重新輸入",
                         "Error",
                         JOptionPane.INFORMATION_MESSAGE

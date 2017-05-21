@@ -29,7 +29,7 @@ public class FormGame {
         PanelGame(Client client) {
             this.client = client;
 
-            // FIXME: 這樣設定會是 600 x 600，但是要用591才會正確
+            // FIXME: 設定是要 600 x 600，但是要用591才會正確
             this.setPreferredSize(new Dimension(591, 591));
         }
 

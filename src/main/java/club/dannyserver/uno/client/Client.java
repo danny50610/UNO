@@ -1,6 +1,7 @@
 package club.dannyserver.uno.client;
 
 
+import club.dannyserver.uno.client.form.FormGame;
 import club.dannyserver.uno.client.form.FormLogin;
 import club.dannyserver.uno.client.form.FormRegister;
 import club.dannyserver.uno.common.packet.IPacket;
@@ -33,6 +34,8 @@ public class Client {
 
     private JFrame registerFrame;
 
+    private JFrame gameFrame;
+
     public JFrame getActiveFrame() {
         return this.activeFrame;
     }
@@ -45,6 +48,7 @@ public class Client {
 
         initLoginFrame();
         initRegisterFrame();
+        initGameFrame();
     }
 
     private void initLoginFrame() {
@@ -63,6 +67,15 @@ public class Client {
         registerFrame.setResizable(false);
         registerFrame.pack();
         registerFrame.setLocationRelativeTo(null);
+    }
+
+    private void initGameFrame() {
+        gameFrame = new JFrame("UNO");
+        gameFrame.setContentPane(new FormGame(this).getMainPanel());
+        gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        gameFrame.setResizable(false);
+        gameFrame.pack();
+        gameFrame.setLocationRelativeTo(null);
     }
 
     public void run() {

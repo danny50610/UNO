@@ -10,6 +10,8 @@ public class User {
 
     public String password;
 
+    public Room room;
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;

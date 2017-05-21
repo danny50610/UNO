@@ -35,11 +35,14 @@ public class PacketLogin implements IPacket {
 
     @Override
     public void serverHandler(Server server, int connectId) {
-        IPacket packet = server.userManager.login(username, password);
+        PacketLoginResult packet = (PacketLoginResult) server.userManager.login(connectId, username, password);
 
         server.sendPacket(connectId, packet);
 
-        // TODO: add Room
+        // Add User in Room
+        if (packet.message.equals("登入成功")) {
+            server.roomManager.addUser(server.userManager.getUser(connectId));
+        }
     }
 
     @Override

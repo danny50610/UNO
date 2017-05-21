@@ -35,6 +35,8 @@ public class Server {
 
     public final UserManager userManager;
 
+    public final RoomManager roomManager = new RoomManager();
+
     public Map<Integer, Socket> connectId2Socket = new HashMap<>();
 
     public Server(int port) throws Exception {

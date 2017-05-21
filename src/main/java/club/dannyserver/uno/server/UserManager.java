@@ -45,7 +45,7 @@ public class UserManager {
         }
     }
 
-    public IPacket login(String username, String password) {
+    public IPacket login(int connectId, String username, String password) {
         int userId = findUserId(username);
         User user = id2User.get(userId);
         if (user == null) {
@@ -53,6 +53,8 @@ public class UserManager {
         }
 
         if (user.login(password)) {
+            connectId2Id.put(connectId, userId);
+
             return new PacketLoginResult("登入成功");
         }
         else {
@@ -73,6 +75,10 @@ public class UserManager {
         saveUserList();
 
         return new PacketRegisterResult("註冊成功，請回登入頁登入");
+    }
+
+    public User getUser(int connectId) {
+        return id2User.get(connectId2Id.get(connectId));
     }
 
     private int findUserId(String username) {

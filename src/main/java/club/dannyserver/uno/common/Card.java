@@ -5,6 +5,10 @@ package club.dannyserver.uno.common;
  */
 public class Card {
 
+    public static final int WIDTH = 240;
+
+    public static final int HEIGHT = 360;
+
     private final UnoColor color;
 
     private final UnoRank rank;
@@ -14,4 +18,11 @@ public class Card {
         this.rank = rank;
     }
 
+    public static int getCardBackRow() {
+        return 0;
+    }
+
+    public static int getCardBackCol() {
+        return 15;
+    }
 }

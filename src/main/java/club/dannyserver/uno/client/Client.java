@@ -79,7 +79,7 @@ public class Client {
     }
 
     public void run() {
-        this.activeFrame = loginFrame;
+        this.activeFrame = gameFrame;
         this.activeFrame.setVisible(true);
     }
 

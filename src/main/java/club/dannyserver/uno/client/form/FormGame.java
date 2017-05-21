@@ -38,6 +38,22 @@ public class FormGame {
 
         private static final int CENTER_SIZE = 600 - 2 * CARD_HEIGHT;
 
+        // 下, 左, 上, 右
+        private static final int[] startXs = new int[]{
+                CARD_HEIGHT,
+                CARD_HEIGHT,
+                CARD_HEIGHT + CENTER_SIZE,
+                CARD_HEIGHT + CENTER_SIZE,
+        };
+
+        // 下, 左, 上, 右
+        private static final int[] startYs = new int[]{
+                CARD_HEIGHT + CENTER_SIZE,
+                CARD_HEIGHT,
+                CARD_HEIGHT,
+                CARD_HEIGHT + CENTER_SIZE
+        };
+
         private int userIndex;
 
         private int[] cardCount = new int[4];
@@ -62,7 +78,7 @@ public class FormGame {
             }
 
             // FIXME: Test code
-            this.userIndex = 0;
+            this.userIndex = 3;
 
             this.cardCount[0] = 5;
             this.cardCount[1] = 7;
@@ -70,6 +86,7 @@ public class FormGame {
             this.cardCount[3] = 15;
 
             this.centerCard = new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR);
+            // FIXME: Test code end
         }
 
         @Override
@@ -83,10 +100,11 @@ public class FormGame {
                     centerCard
             );
 
-            drawAllBackCard((Graphics2D) g.create(), 3, CARD_HEIGHT, CARD_HEIGHT + CENTER_SIZE, Math.toRadians(0));
-            drawAllBackCard((Graphics2D) g.create(), 6, CARD_HEIGHT, CARD_HEIGHT, Math.toRadians(90));
-            drawAllBackCard((Graphics2D) g.create(), 16, CARD_HEIGHT + CENTER_SIZE, CARD_HEIGHT, Math.toRadians(180));
-            drawAllBackCard((Graphics2D) g.create(), 10, CARD_HEIGHT + CENTER_SIZE, CARD_HEIGHT + CENTER_SIZE, Math.toRadians(270));
+            // drawAllBackCard((Graphics2D) g.create(), 3, CARD_HEIGHT, CARD_HEIGHT + CENTER_SIZE, Math.toRadians(0));
+            for (int i = 1; i < 4; i++) {
+                int index = (userIndex + i) % 4;
+                drawAllBackCard((Graphics2D) g.create(), cardCount[index], startXs[i], startYs[i], Math.toRadians(i * 90));
+            }
 
             // debug line
             g.drawRect(CARD_HEIGHT, CARD_HEIGHT + CENTER_SIZE, CENTER_SIZE, CARD_HEIGHT);

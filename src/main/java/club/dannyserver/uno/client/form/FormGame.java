@@ -121,7 +121,7 @@ public class FormGame {
                 drawAllBackCard((Graphics2D) g.create(), cardCount[index], startXs[i], startYs[i], Math.toRadians(i * 90));
             }
 
-            // debug line
+            // FIXME: debug line
             g.drawRect(CARD_HEIGHT, CARD_HEIGHT + CENTER_SIZE, CENTER_SIZE, CARD_HEIGHT);
             g.drawRect(0, CARD_HEIGHT, CARD_HEIGHT, CENTER_SIZE);
             g.drawRect(CARD_HEIGHT, 0, CENTER_SIZE, CARD_HEIGHT);

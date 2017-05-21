@@ -66,6 +66,11 @@ public class FormGame {
         // 玩家手上的牌
         private Card[] cards;
 
+        private String[] usernames = new String[4];
+
+        // 表示換誰出牌
+        private int userTurnIndex;
+
         private final Client client;
 
         private BufferedImage image;
@@ -85,6 +90,12 @@ public class FormGame {
 
             // FIXME: Test code
             this.userIndex = 3;
+            this.userTurnIndex = 0;
+
+            this.usernames[0] = "danny";
+            this.usernames[1] = "illya1";
+            this.usernames[2] = "asdjkasjadlk";
+            this.usernames[3] = "illya2514";
 
             this.cardCount[0] = 5;
             this.cardCount[1] = 7;
@@ -119,11 +130,13 @@ public class FormGame {
                     centerCard
             );
 
-            drawAllCard((Graphics2D) g.create(), startXs[0], startYs[0], this.cards);
+            drawAllCard((Graphics2D) g.create(), startXs[0], startYs[0]);
             for (int i = 1; i < 4; i++) {
                 int index = (userIndex + i) % 4;
                 drawAllBackCard((Graphics2D) g.create(), cardCount[index], startXs[i], startYs[i], Math.toRadians(i * 90));
             }
+
+            drawAllUsername((Graphics2D) g.create());
 
             // FIXME: debug line
             g.drawRect(CARD_HEIGHT, CARD_HEIGHT + CENTER_SIZE, CENTER_SIZE, CARD_HEIGHT);
@@ -169,7 +182,7 @@ public class FormGame {
             );
         }
 
-        private void drawAllCard(Graphics2D g, int startX, int startY, Card[] cards) {
+        private void drawAllCard(Graphics2D g, int startX, int startY) {
             double dw = CARD_WIDTH;
             int totalCardWidth = cards.length * CARD_WIDTH;
             if (totalCardWidth > CENTER_SIZE) {
@@ -206,6 +219,29 @@ public class FormGame {
                     sourceY2,
                     this
             );
+        }
+
+        private void drawAllUsername(Graphics2D g) {
+            g.setFont(new Font(g.getFont().getFontName(), Font.PLAIN, 20));
+            for (int i = 0; i < 4; i++) {
+                g.rotate(Math.toRadians(i * 90), 300, 300);
+
+                int index = (i + userIndex) % 4;
+
+                if (index == userTurnIndex) {
+                    g.setColor(Color.RED);
+                }
+                else {
+                    g.setColor(Color.BLACK);
+                }
+
+                String text = usernames[index];
+                if (text == null) {
+                    text = "";
+                }
+                int width = g.getFontMetrics().stringWidth(text);
+                g.drawString(text, 300 - (width / 2), 475);
+            }
         }
 
         public void setUserIndex(int index) {

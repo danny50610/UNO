@@ -21,7 +21,7 @@ public class Room {
 
         // TODO: Send userIndex to user
 
-        // TODO: Send notification (userIndex & username) to other user
+        // TODO: Send username list to all user
 
     }
 

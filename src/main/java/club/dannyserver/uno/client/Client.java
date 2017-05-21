@@ -103,6 +103,12 @@ public class Client {
         this.activeFrame.setVisible(true);
     }
 
+    public void switchToGameFrame() {
+        activeFrame.setVisible(false);
+        this.activeFrame = gameFrame;
+        this.activeFrame.setVisible(true);
+    }
+
     public void sendLogin(String username, String password) {
         IPacket packet = new PacketLogin(username, password);
 

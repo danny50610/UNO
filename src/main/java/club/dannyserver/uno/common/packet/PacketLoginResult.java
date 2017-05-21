@@ -42,9 +42,13 @@ public class PacketLoginResult implements IPacket {
                 JOptionPane.showMessageDialog(
                         client.getActiveFrame(),
                         message,
-                        "test",
+                        "Message",
                         JOptionPane.INFORMATION_MESSAGE
                 );
+
+                if (message.equals("登入成功")) {
+                    client.switchToGameFrame();
+                }
             }
         });
     }

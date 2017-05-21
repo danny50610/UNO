@@ -1,6 +1,7 @@
 package club.dannyserver.uno.common.packet;
 
 import club.dannyserver.uno.client.Client;
+import club.dannyserver.uno.common.User;
 import club.dannyserver.uno.server.Server;
 
 import java.io.DataInputStream;
@@ -41,7 +42,10 @@ public class PacketLogin implements IPacket {
 
         // Add User into Room
         if (packet.message.equals("登入成功")) {
-            server.roomManager.addUser(server.userManager.getUser(connectId));
+            User user = server.userManager.getUser(connectId);
+            user.connectId = connectId;
+
+            server.roomManager.addUser(user);
         }
     }
 

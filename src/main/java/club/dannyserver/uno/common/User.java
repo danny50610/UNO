@@ -4,7 +4,7 @@ import java.net.Socket;
 
 public class User {
 
-    public Socket socket;
+    public int connectId;
 
     public String username;
 

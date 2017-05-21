@@ -16,9 +16,13 @@ public class Room {
     }
 
     public void addUser(User user) {
+        user.room = this;
         users[userCount++] = user;
 
-        user.room = this;
+        // TODO: Send userIndex to user
+
+        // TODO: Send notification (userIndex & username) to other user
+
     }
 
     /**

@@ -39,7 +39,7 @@ public class PacketLogin implements IPacket {
 
         server.sendPacket(connectId, packet);
 
-        // Add User in Room
+        // Add User into Room
         if (packet.message.equals("登入成功")) {
             server.roomManager.addUser(server.userManager.getUser(connectId));
         }

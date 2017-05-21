@@ -33,7 +33,7 @@ public class Server {
 
     private final BlockingQueue<IJob> queue = new LinkedBlockingQueue<>();
 
-    public final UserManager userManager;
+    public final UserManager userManager = new UserManager("user.txt");
 
     public final RoomManager roomManager = new RoomManager();
 
@@ -41,8 +41,6 @@ public class Server {
 
     public Server(int port) throws Exception {
         this.serverSocket = new ServerSocket(port);
-
-        this.userManager = new UserManager("user.txt");
     }
 
     public void run() throws Exception {

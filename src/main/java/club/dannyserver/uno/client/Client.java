@@ -4,6 +4,7 @@ package club.dannyserver.uno.client;
 import club.dannyserver.uno.client.form.FormGame;
 import club.dannyserver.uno.client.form.FormLogin;
 import club.dannyserver.uno.client.form.FormRegister;
+import club.dannyserver.uno.common.UnoColor;
 import club.dannyserver.uno.common.packet.IPacket;
 import club.dannyserver.uno.common.packet.PacketLogin;
 import club.dannyserver.uno.common.packet.PacketPlayCard;
@@ -134,8 +135,8 @@ public class Client {
         }
     }
 
-    public void sendIndex(int index) {
-        IPacket packet = new PacketPlayCard(index);
+    public void sendIndex(int index, UnoColor pickColor) {
+        IPacket packet = new PacketPlayCard(index, pickColor);
 
         try {
             packet.writeToStream(dataOutputStream);

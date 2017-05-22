@@ -95,7 +95,7 @@ public class Room {
      * 發送 Room Info (centerCard, userTurnIndex, turnVector)
      */
     private void updateRoomInfo() {
-        IPacket packet = new PacketUpdateRoomInfo(centerCard, userTurnIndex, turnVector);
+        IPacket packet = new PacketUpdateRoomInfo(centerCard, userTurnIndex, turnVector, color);
         for (int i = 0; i < MAX_USER; i++) {
             server.sendPacket(users[i].connectId, packet);
         }
@@ -172,7 +172,7 @@ public class Room {
         return result;
     }
 
-    public void playCard(User user, int cardIndex) {
+    public void playCard(User user, int cardIndex, UnoColor pickColor) {
         int userIndex = -1;
         for (int i = 0; i < MAX_USER; i++) {
             if (users[i].username.equals(user.username)) {
@@ -212,8 +212,10 @@ public class Room {
         // TODO: 勝利檢查 & Room 更新
 
         if (card.getColor() == UnoColor.BLACK) {
-            // TODO: update color
-            //this.color
+            this.color = pickColor;
+        }
+        else {
+            this.color = null;
         }
 
         boolean canNextUserPlay = true;

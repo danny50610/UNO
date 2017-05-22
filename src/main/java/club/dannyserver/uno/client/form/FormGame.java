@@ -103,7 +103,7 @@ public class FormGame {
             this.cardCount[2] = 3;
             this.cardCount[3] = 15;
 
-            this.centerCard = new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR);
+            // this.centerCard = new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR);
 
             this.cards = new Card[]{
                     new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR),
@@ -125,11 +125,13 @@ public class FormGame {
             super.paintComponent(g);
 
             // Center card
-            drawCard((Graphics2D) g.create(),
-                    CARD_HEIGHT + (CENTER_SIZE - CARD_WIDTH) / 2,
-                    CARD_HEIGHT + (CENTER_SIZE - CARD_HEIGHT) / 2,
-                    centerCard
-            );
+            if (centerCard != null) {
+                drawCard((Graphics2D) g.create(),
+                        CARD_HEIGHT + (CENTER_SIZE - CARD_WIDTH) / 2,
+                        CARD_HEIGHT + (CENTER_SIZE - CARD_HEIGHT) / 2,
+                        centerCard
+                );
+            }
 
             drawAllCard((Graphics2D) g.create(), startXs[0], startYs[0]);
             for (int i = 1; i < 4; i++) {

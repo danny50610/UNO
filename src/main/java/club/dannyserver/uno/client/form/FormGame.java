@@ -264,7 +264,49 @@ public class FormGame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println(e.getX() + " " + e.getY());
+            if (isGameStart) {
+
+                int x = e.getX();
+                int y = e.getY();
+
+                if (CARD_HEIGHT + CENTER_SIZE <= y && y <= 600) {
+                    if (CARD_HEIGHT <= x && x <= 600 - CARD_HEIGHT) {
+                        int index = -1;
+                        int count = cards.size();
+
+                        if (count != 0) {
+                            int totalWidth = count * CARD_WIDTH;
+                            x -= CARD_HEIGHT;
+
+                            if (totalWidth < CENTER_SIZE) {
+                                x -= (CENTER_SIZE - totalWidth) / 2;
+                                if (x < 0) {
+                                    index = -1;
+                                }
+                                else {
+                                    index = x / CARD_WIDTH;
+                                    if (index >= count) {
+                                        index = -1;
+                                    }
+                                }
+                            }
+                            else {
+                                if (x > CENTER_SIZE - CARD_WIDTH) {
+                                    index = count - 1;
+                                }
+                                else {
+                                    int width = (CENTER_SIZE - CARD_WIDTH) / (count - 1);
+                                    index = x / width;
+                                }
+                            }
+                        }
+
+
+
+                        System.out.println(e.getX() + " " + e.getY() + " " + index);
+                    }
+                }
+            }
         }
 
         @Override

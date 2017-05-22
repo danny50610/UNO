@@ -248,13 +248,11 @@ public class FormGame {
 
         public void setUserIndex(int index) {
             this.userIndex = index;
-
-            System.out.println(this.userIndex);
         }
 
         public void setUsernames(String[] usernames) {
             this.usernames = usernames;
-            System.out.println(Arrays.toString(this.usernames));
+
             this.repaint();
         }
     }

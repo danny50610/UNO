@@ -28,7 +28,7 @@ public class FormGame {
         mainPanel = new PanelGame(client);
     }
 
-    static class PanelGame extends JPanel {
+    public static class PanelGame extends JPanel {
 
         private static final double SCALE = 0.3;
 
@@ -69,7 +69,7 @@ public class FormGame {
         private String[] usernames = new String[4];
 
         // 表示換誰出牌
-        private int userTurnIndex;
+        private int userTurnIndex = -1;
 
         private final Client client;
 

@@ -15,6 +15,7 @@ public abstract class PacketManager {
         // server -> client
         packetMap.put(64, PacketLoginResult.class);
         packetMap.put(65, PacketRegisterResult.class);
+        packetMap.put(66, PacketUserIndex.class);
     }
 
     public static IPacket getPacket(int packetId) {

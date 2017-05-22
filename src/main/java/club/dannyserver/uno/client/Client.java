@@ -40,6 +40,10 @@ public class Client {
         return this.activeFrame;
     }
 
+    public JFrame getGameFrame() {
+        return gameFrame;
+    }
+
     public Client(String ip, int port) throws Exception {
         this.socket = new Socket(ip, port);
         this.dataOutputStream = new DataOutputStream(socket.getOutputStream());

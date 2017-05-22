@@ -74,6 +74,8 @@ public class FormGame {
         // 表示換誰出牌
         private int userTurnIndex = -1;
 
+        private int turnVector = 1;
+
         private final Client client;
 
         private BufferedImage image;
@@ -238,6 +240,14 @@ public class FormGame {
 
         public void setCards(List<Card> cards) {
             this.cards = cards;
+
+            this.repaint();
+        }
+
+        public void setRoomInfo(Card centerCard, int userTurnIndex, int turnVector) {
+            this.centerCard = centerCard;
+            this.userTurnIndex = userTurnIndex;
+            this.turnVector = turnVector;
 
             this.repaint();
         }

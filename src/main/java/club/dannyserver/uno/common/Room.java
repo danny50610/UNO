@@ -68,9 +68,10 @@ public class Room {
             server.sendPacket(users[i].connectId, new PacketUpdateCard(users[i].cards));
         }
 
+        updateRoomInfo();
+
         // TODO: 通知 Game start
 
-        // TODO: 發送 Room Info (centerCard, userTurnIndex, turnVector)
     }
 
     /**
@@ -82,6 +83,16 @@ public class Room {
             cardCount[i] = users[i].cards.size();
         }
         IPacket packet = new PacketUpdateCardCount(cardCount);
+        for (int i = 0; i < MAX_USER; i++) {
+            server.sendPacket(users[i].connectId, packet);
+        }
+    }
+
+    /**
+     * 發送 Room Info (centerCard, userTurnIndex, turnVector)
+     */
+    private void updateRoomInfo() {
+        IPacket packet = new PacketUpdateRoomInfo(centerCard, userTurnIndex, turnVector);
         for (int i = 0; i < MAX_USER; i++) {
             server.sendPacket(users[i].connectId, packet);
         }

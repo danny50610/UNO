@@ -8,6 +8,8 @@ import club.dannyserver.uno.common.UnoRank;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class FormGame {
         mainPanel = new PanelGame(client);
     }
 
-    public static class PanelGame extends JPanel {
+    public static class PanelGame extends JPanel implements MouseListener {
 
         private static final double SCALE = 0.3;
 
@@ -94,6 +96,8 @@ public class FormGame {
                 e.printStackTrace();
                 System.exit(-1);
             }
+
+            this.addMouseListener(this);
         }
 
         @Override
@@ -256,6 +260,31 @@ public class FormGame {
 
         public void startGame() {
             this.isGameStart = true;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            System.out.println(e.getX() + " " + e.getY());
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            // Nothing
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            // Nothing
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            // Nothing
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            // Nothing
         }
     }
 }

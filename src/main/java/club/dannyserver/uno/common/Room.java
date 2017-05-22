@@ -61,11 +61,15 @@ public class Room {
             }
         }
 
+        // TODO: centerCard 決定 centerCard (跳過特別牌)
+
         // TODO: 更新所有玩家手牌張數
 
         // TODO: 更新個別玩家手上的手牌
 
         // TODO: 通知 Game start
+
+        // TODO: 發送 Room Info (centerCard, userTurnIndex, turnVector)
     }
 
     private Server server;

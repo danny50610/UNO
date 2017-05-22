@@ -41,6 +41,8 @@ public class Server {
 
     public Server(int port) throws Exception {
         this.serverSocket = new ServerSocket(port);
+
+        roomManager.setServer(this);
     }
 
     public void run() throws Exception {

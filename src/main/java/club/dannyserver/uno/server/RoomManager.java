@@ -9,6 +9,12 @@ import java.util.List;
 
 public class RoomManager {
 
+    private Server server;
+
+    public void setServer(Server server) {
+        this.server = server;
+    }
+
     public List<Room> rooms = new ArrayList<>();
 
     public void addUser(User user) {
@@ -22,6 +28,7 @@ public class RoomManager {
 
         if (rooms.isEmpty()) {
             result = new Room();
+            result.setServer(server);
             rooms.add(result);
             return result;
         }
@@ -30,6 +37,7 @@ public class RoomManager {
 
         if (result.isFull()) {
             result = new Room();
+            result.setServer(server);
             rooms.add(result);
         }
 

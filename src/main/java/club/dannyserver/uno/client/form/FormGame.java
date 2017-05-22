@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class FormGame {
     private final Client client;
@@ -89,13 +90,13 @@ public class FormGame {
             }
 
             // FIXME: Test code
-            this.userIndex = 3;
-            this.userTurnIndex = 0;
+//            this.userIndex = 1;
+            //this.userTurnIndex = 0;
 
-            this.usernames[0] = "danny";
-            this.usernames[1] = "illya1";
-            this.usernames[2] = "asdjkasjadlk";
-            this.usernames[3] = "illya2514";
+//            this.usernames[0] = "danny";
+//            this.usernames[1] = "illya1";
+//            this.usernames[2] = "asdjkasjadlk";
+//            this.usernames[3] = "illya2514";
 
             this.cardCount[0] = 5;
             this.cardCount[1] = 7;
@@ -224,28 +225,37 @@ public class FormGame {
         private void drawAllUsername(Graphics2D g) {
             g.setFont(new Font(g.getFont().getFontName(), Font.PLAIN, 20));
             for (int i = 0; i < 4; i++) {
-                g.rotate(Math.toRadians(i * 90), 300, 300);
+                Graphics2D tempG = (Graphics2D) g.create();
+                tempG.rotate(Math.toRadians(i * 90), 300, 300);
 
                 int index = (i + userIndex) % 4;
 
                 if (index == userTurnIndex) {
-                    g.setColor(Color.RED);
+                    tempG.setColor(Color.RED);
                 }
                 else {
-                    g.setColor(Color.BLACK);
+                    tempG.setColor(Color.BLACK);
                 }
 
                 String text = usernames[index];
                 if (text == null) {
                     text = "";
                 }
-                int width = g.getFontMetrics().stringWidth(text);
-                g.drawString(text, 300 - (width / 2), 475);
+                int width = tempG.getFontMetrics().stringWidth(text);
+                tempG.drawString(text, 300 - (width / 2), 475);
             }
         }
 
         public void setUserIndex(int index) {
             this.userIndex = index;
+
+            System.out.println(this.userIndex);
+        }
+
+        public void setUsernames(String[] usernames) {
+            this.usernames = usernames;
+            System.out.println(Arrays.toString(this.usernames));
+            this.repaint();
         }
     }
 }

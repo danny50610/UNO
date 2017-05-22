@@ -18,6 +18,14 @@ public class Card {
         this.rank = rank;
     }
 
+    public boolean isSpecial() {
+        return rank == UnoRank.SKIP ||
+                rank == UnoRank.DRAW_TWO ||
+                rank == UnoRank.REVERSE ||
+                rank == UnoRank.WILD ||
+                rank == UnoRank.WILD_DRAW_FOUR;
+    }
+
     public static int getCardBackRow() {
         return 0;
     }

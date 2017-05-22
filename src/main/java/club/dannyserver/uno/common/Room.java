@@ -57,11 +57,11 @@ public class Room {
         // 發牌 (每人7張)
         for (int j = 0; j < 7; j++) {
             for (int i = 0; i < MAX_USER; i++) {
-                users[i].cards.add(cards.remove(0));
+                users[i].cards.add(getNextCard());
             }
         }
 
-        // TODO: centerCard 決定 centerCard (跳過特別牌)
+        initCenterCard();
 
         // TODO: 更新所有玩家手牌張數
 
@@ -70,6 +70,17 @@ public class Room {
         // TODO: 通知 Game start
 
         // TODO: 發送 Room Info (centerCard, userTurnIndex, turnVector)
+    }
+
+    private void initCenterCard() {
+        while (true) {
+            centerCard = getNextCard();
+
+            // 跳過特別牌
+            if (!centerCard.isSpecial()) {
+                break;
+            }
+        }
     }
 
     private Server server;
@@ -82,7 +93,17 @@ public class Room {
 
     private int turnVector = 1;
 
+    private Card centerCard;
+
     private List<Card> cards;
+
+    public Card getNextCard() {
+        if (cards.isEmpty()) {
+            cards = genAllCard();
+        }
+
+        return cards.remove(0);
+    }
 
     /**
      * 產生完整的卡堆，總共 108 張，並隨機打亂

@@ -6,6 +6,7 @@ import club.dannyserver.uno.common.packet.PacketUserIndex;
 import club.dannyserver.uno.server.Server;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,6 +39,33 @@ public class Room {
         for (int i = 0; i < userCount; i++) {
             server.sendPacket(users[i].connectId, packet);
         }
+
+        if (this.isFull()) {
+            initGame();
+        }
+    }
+
+    private void initGame() {
+        userTurnIndex = 0;
+        turnVector = 1;
+        cards = genAllCard();
+
+        for (int i = 0; i < MAX_USER; i++) {
+            users[i].cards.clear();
+        }
+
+        // 發牌 (每人7張)
+        for (int j = 0; j < 7; j++) {
+            for (int i = 0; i < MAX_USER; i++) {
+                users[i].cards.add(cards.remove(0));
+            }
+        }
+
+        // TODO: 更新所有玩家手牌張數
+
+        // TODO: 更新個別玩家手上的手牌
+
+        // TODO: 通知 Game start
     }
 
     private Server server;
@@ -45,6 +73,12 @@ public class Room {
     public void setServer(Server server) {
         this.server = server;
     }
+
+    private int userTurnIndex = 0;
+
+    private int turnVector = 1;
+
+    private List<Card> cards;
 
     /**
      * 產生完整的卡堆，總共 108 張，並隨機打亂

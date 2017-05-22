@@ -209,7 +209,24 @@ public class Room {
         user.cards.remove(cardIndex);
         centerCard = card;
 
-        // TODO: 勝利檢查 & Room 更新
+        // 勝利檢查 & Room 更新
+        if (user.cards.isEmpty()) {
+            // 更新資訊
+            updateCardCount();
+
+            // 更新個別玩家手上的手牌
+            for (int i = 0; i < MAX_USER; i++) {
+                server.sendPacket(users[i].connectId, new PacketUpdateCard(users[i].cards));
+            }
+
+            updateRoomInfo();
+
+            for (int i = 0; i < MAX_USER; i++) {
+                server.sendPacket(users[i].connectId, new PacketWinResult(user.username + " Win."));
+            }
+
+            return;
+        }
 
         if (card.getColor() == UnoColor.BLACK) {
             this.color = pickColor;

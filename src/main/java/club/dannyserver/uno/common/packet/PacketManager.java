@@ -11,6 +11,7 @@ public abstract class PacketManager {
         // client -> server
         packetMap.put(1, PacketLogin.class);
         packetMap.put(2, PacketRegister.class);
+        packetMap.put(3, PacketPlayCard.class);
 
         // server -> client
         packetMap.put(64, PacketLoginResult.class);

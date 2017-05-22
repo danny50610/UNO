@@ -292,25 +292,25 @@ public class Room {
         }
 
         // 檢查下一位玩家 (或是下下一位)
-        nextUser = users[userTurnIndex];
+        while (true) {
+            nextUser = users[userTurnIndex];
 
-        boolean canPlay = false;
-        for (Card localCard : nextUser.cards) {
-            if (centerCard.canPlayedBy(localCard, color)) {
-                canPlay = true;
+            boolean canPlay = false;
+            for (Card localCard : nextUser.cards) {
+                if (centerCard.canPlayedBy(localCard, color)) {
+                    canPlay = true;
+                }
             }
-        }
+            if (canPlay) break;
 
-        if (!canPlay) {
             Card newCard = getNextCard();
-
             nextUser.cards.add(newCard);
-
-            // 檢查新的牌是否能出，不能跳下一位
-            if (!centerCard.canPlayedBy(newCard, color)) {
-                userTurnIndex += turnVector;
-                userTurnIndex = (userTurnIndex + 4) % 4;
+            if (centerCard.canPlayedBy(newCard, color)) {
+                break;
             }
+
+            userTurnIndex += turnVector;
+            userTurnIndex = (userTurnIndex + 4) % 4;
         }
 
         // 更新資訊

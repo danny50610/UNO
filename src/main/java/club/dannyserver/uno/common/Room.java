@@ -1,9 +1,6 @@
 package club.dannyserver.uno.common;
 
-import club.dannyserver.uno.common.packet.IPacket;
-import club.dannyserver.uno.common.packet.PacketUpdateCardCount;
-import club.dannyserver.uno.common.packet.PacketUpdateRoomUsername;
-import club.dannyserver.uno.common.packet.PacketUserIndex;
+import club.dannyserver.uno.common.packet.*;
 import club.dannyserver.uno.server.Server;
 
 import java.util.ArrayList;
@@ -66,7 +63,10 @@ public class Room {
 
         updateCardCount();
 
-        // TODO: 更新個別玩家手上的手牌
+        // 更新個別玩家手上的手牌
+        for (int i = 0; i < MAX_USER; i++) {
+            server.sendPacket(users[i].connectId, new PacketUpdateCard(users[i].cards));
+        }
 
         // TODO: 通知 Game start
 

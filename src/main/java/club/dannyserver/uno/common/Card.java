@@ -18,6 +18,14 @@ public class Card {
         this.rank = rank;
     }
 
+    public UnoColor getColor() {
+        return color;
+    }
+
+    public UnoRank getRank() {
+        return rank;
+    }
+
     public boolean isSpecial() {
         return rank == UnoRank.SKIP ||
                 rank == UnoRank.DRAW_TWO ||

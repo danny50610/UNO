@@ -10,7 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class FormGame {
     private final Client client;
@@ -65,7 +67,7 @@ public class FormGame {
         private Card centerCard;
 
         // 玩家手上的牌
-        private Card[] cards;
+        private List<Card> cards = new ArrayList<>();
 
         private String[] usernames = new String[4];
 
@@ -105,18 +107,18 @@ public class FormGame {
 
             // this.centerCard = new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR);
 
-            this.cards = new Card[]{
-                    new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR),
-                    new Card(UnoColor.BLUE, UnoRank.ZERO),
-                    new Card(UnoColor.GREEN, UnoRank.FOUR),
-                    new Card(UnoColor.YELLOW, UnoRank.FIVE),
-                    new Card(UnoColor.YELLOW, UnoRank.DRAW_TWO),
-                    new Card(UnoColor.RED, UnoRank.REVERSE),
-                    new Card(UnoColor.GREEN, UnoRank.ONE),
-                    new Card(UnoColor.GREEN, UnoRank.THREE),
-                    new Card(UnoColor.GREEN, UnoRank.DRAW_TWO),
-                    new Card(UnoColor.BLACK, UnoRank.WILD),
-            };
+//            this.cards = new Card[]{
+//                    new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR),
+//                    new Card(UnoColor.BLUE, UnoRank.ZERO),
+//                    new Card(UnoColor.GREEN, UnoRank.FOUR),
+//                    new Card(UnoColor.YELLOW, UnoRank.FIVE),
+//                    new Card(UnoColor.YELLOW, UnoRank.DRAW_TWO),
+//                    new Card(UnoColor.RED, UnoRank.REVERSE),
+//                    new Card(UnoColor.GREEN, UnoRank.ONE),
+//                    new Card(UnoColor.GREEN, UnoRank.THREE),
+//                    new Card(UnoColor.GREEN, UnoRank.DRAW_TWO),
+//                    new Card(UnoColor.BLACK, UnoRank.WILD),
+//            };
             // FIXME: Test code end
         }
 
@@ -187,17 +189,17 @@ public class FormGame {
 
         private void drawAllCard(Graphics2D g, int startX, int startY) {
             double dw = CARD_WIDTH;
-            int totalCardWidth = cards.length * CARD_WIDTH;
+            int totalCardWidth = cards.size() * CARD_WIDTH;
             if (totalCardWidth > CENTER_SIZE) {
-                dw = (CENTER_SIZE - CARD_WIDTH) / (double) (cards.length - 1);
+                dw = (CENTER_SIZE - CARD_WIDTH) / (double) (cards.size() - 1);
             }
 
-            for (int i = 0; i < cards.length; i++) {
+            for (int i = 0; i < cards.size(); i++) {
                 if (totalCardWidth > CENTER_SIZE) {
-                    drawCard(g, (int) (startX + i * dw), startY, cards[i]);
+                    drawCard(g, (int) (startX + i * dw), startY, cards.get(i));
                 }
                 else {
-                    drawCard(g, (int) (startX + i * dw + (CENTER_SIZE - totalCardWidth) / 2), startY, cards[i]);
+                    drawCard(g, (int) (startX + i * dw + (CENTER_SIZE - totalCardWidth) / 2), startY, cards.get(i));
                 }
             }
         }
@@ -260,6 +262,12 @@ public class FormGame {
 
         public void setCardCount(int[] cardCount) {
             this.cardCount = cardCount;
+
+            this.repaint();
+        }
+
+        public void setCards(List<Card> cards) {
+            this.cards = cards;
 
             this.repaint();
         }

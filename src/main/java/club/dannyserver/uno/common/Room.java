@@ -70,8 +70,11 @@ public class Room {
 
         updateRoomInfo();
 
-        // TODO: 通知 Game start
-
+        // 通知 Game start
+        IPacket packet = new PacketGameStart();
+        for (int i = 0; i < MAX_USER; i++) {
+            server.sendPacket(users[i].connectId, packet);
+        }
     }
 
     /**

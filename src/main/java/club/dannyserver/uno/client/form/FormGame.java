@@ -76,6 +76,8 @@ public class FormGame {
 
         private int turnVector = 1;
 
+        private boolean isGameStart = false;
+
         private final Client client;
 
         private BufferedImage image;
@@ -250,6 +252,10 @@ public class FormGame {
             this.turnVector = turnVector;
 
             this.repaint();
+        }
+
+        public void startGame() {
+            this.isGameStart = true;
         }
     }
 }

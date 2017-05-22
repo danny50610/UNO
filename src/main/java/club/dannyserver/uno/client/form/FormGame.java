@@ -264,7 +264,7 @@ public class FormGame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            if (isGameStart) {
+            if (isGameStart && userIndex == userTurnIndex) {
 
                 int x = e.getX();
                 int y = e.getY();
@@ -301,7 +301,7 @@ public class FormGame {
                             }
                         }
 
-
+                        // TODO: Send packet
 
                         System.out.println(e.getX() + " " + e.getY() + " " + index);
                     }

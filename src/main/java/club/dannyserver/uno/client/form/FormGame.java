@@ -107,7 +107,7 @@ public class FormGame {
                 if (pickColor != null) {
                     Graphics gC = g.create();
                     gC.setColor(getColor(pickColor));
-                    gC.fillRect(300 - 50, 300 - 50, 100, 100);
+                    gC.fillRect(300 - 50, 300 - 75, 100, 150);
                 }
 
 
@@ -315,25 +315,27 @@ public class FormGame {
                         pickColor = UnoColor.values()[pickColorIndex];
 
                         isPickColorMode = false;
-
+                        this.repaint();
                         client.sendIndex(selectIndex, pickColor);
                     }
                 }
+                else {
+                    if (CARD_HEIGHT + CENTER_SIZE <= y && y <= 600) {
+                        if (CARD_HEIGHT <= x && x <= 600 - CARD_HEIGHT) {
+                            updateSelectIndex(x, y);
 
-                if (CARD_HEIGHT + CENTER_SIZE <= y && y <= 600) {
-                    if (CARD_HEIGHT <= x && x <= 600 - CARD_HEIGHT) {
-                        updateSelectIndex(x, y);
+                            if (selectIndex != -1) {
+                                Card card = cards.get(selectIndex);
 
-                        if (selectIndex != -1) {
-                            Card card = cards.get(selectIndex);
+                                if (card.getColor() == UnoColor.BLACK) {
+                                    isPickColorMode = true;
+                                    this.repaint();
+                                    return;
+                                }
+                                pickColor = null;
 
-                            if (card.getColor() == UnoColor.BLACK) {
-                                isPickColorMode = true;
-                                return;
+                                client.sendIndex(selectIndex, pickColor);
                             }
-                            pickColor = null;
-
-                            client.sendIndex(selectIndex, pickColor);
                         }
                     }
                 }

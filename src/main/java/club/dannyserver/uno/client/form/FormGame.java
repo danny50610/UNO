@@ -305,8 +305,6 @@ public class FormGame {
                         if (index != -1) {
                             client.sendIndex(index);
                         }
-
-                        System.out.println(e.getX() + " " + e.getY() + " " + index);
                     }
                 }
             }

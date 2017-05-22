@@ -205,8 +205,11 @@ public class Room {
             if (card.getRank() != UnoRank.WILD_DRAW_FOUR) return;
         }
 
+        // 出牌
         user.cards.remove(cardIndex);
         centerCard = card;
+
+        // TODO: 勝利檢查 & Room 更新
 
         if (card.getColor() == UnoColor.BLACK) {
             // TODO: update color
@@ -297,7 +300,15 @@ public class Room {
         }
 
         if (!canPlay) {
-            nextUser.cards.add(getNextCard());
+            Card newCard = getNextCard();
+
+            nextUser.cards.add(newCard);
+
+            // 檢查新的牌是否能出，不能跳下一位
+            if (!centerCard.canPlayedBy(newCard, color)) {
+                userTurnIndex += turnVector;
+                userTurnIndex = (userTurnIndex + 4) % 4;
+            }
         }
 
         // 更新資訊

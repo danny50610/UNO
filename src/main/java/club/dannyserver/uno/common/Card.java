@@ -49,4 +49,29 @@ public class Card {
     public int getCardCol() {
         return rank.getCol();
     }
+
+    /**
+     * 是否可以被覆蓋
+     * @param card
+     * @param color
+     * @return
+     */
+    public boolean canPlayedBy(Card card, UnoColor color) {
+        boolean isSameRank = this.rank == card.rank;
+
+        UnoColor thisColor = this.color;
+        if (thisColor == UnoColor.BLACK) {
+            thisColor = color;
+        }
+
+        boolean isColorPass = false;
+        if (card.color == UnoColor.BLACK) {
+            isColorPass = true;
+        }
+        else {
+            isColorPass = (thisColor == card.color);
+        }
+
+        return isColorPass || isSameRank;
+    }
 }

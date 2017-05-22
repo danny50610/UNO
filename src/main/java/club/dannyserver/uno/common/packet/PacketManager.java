@@ -17,6 +17,7 @@ public abstract class PacketManager {
         packetMap.put(65, PacketRegisterResult.class);
         packetMap.put(66, PacketUserIndex.class);
         packetMap.put(67, PacketUpdateRoomUsername.class);
+        packetMap.put(68, PacketUpdateCardCount.class);
     }
 
     public static IPacket getPacket(int packetId) {

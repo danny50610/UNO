@@ -1,6 +1,7 @@
 package club.dannyserver.uno.common;
 
 import club.dannyserver.uno.common.packet.IPacket;
+import club.dannyserver.uno.common.packet.PacketUpdateCardCount;
 import club.dannyserver.uno.common.packet.PacketUpdateRoomUsername;
 import club.dannyserver.uno.common.packet.PacketUserIndex;
 import club.dannyserver.uno.server.Server;
@@ -63,13 +64,27 @@ public class Room {
 
         initCenterCard();
 
-        // TODO: 更新所有玩家手牌張數
+        updateCardCount();
 
         // TODO: 更新個別玩家手上的手牌
 
         // TODO: 通知 Game start
 
         // TODO: 發送 Room Info (centerCard, userTurnIndex, turnVector)
+    }
+
+    /**
+     * 更新所有玩家手牌張數
+     */
+    private void updateCardCount() {
+        int[] cardCount = new int[MAX_USER];
+        for (int i = 0; i < MAX_USER; i++) {
+            cardCount[i] = users[i].cards.size();
+        }
+        IPacket packet = new PacketUpdateCardCount(cardCount);
+        for (int i = 0; i < MAX_USER; i++) {
+            server.sendPacket(users[i].connectId, packet);
+        }
     }
 
     private void initCenterCard() {

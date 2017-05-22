@@ -98,10 +98,10 @@ public class FormGame {
 //            this.usernames[2] = "asdjkasjadlk";
 //            this.usernames[3] = "illya2514";
 
-            this.cardCount[0] = 5;
-            this.cardCount[1] = 7;
-            this.cardCount[2] = 3;
-            this.cardCount[3] = 15;
+//            this.cardCount[0] = 5;
+//            this.cardCount[1] = 7;
+//            this.cardCount[2] = 3;
+//            this.cardCount[3] = 15;
 
             // this.centerCard = new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR);
 
@@ -254,6 +254,12 @@ public class FormGame {
 
         public void setUsernames(String[] usernames) {
             this.usernames = usernames;
+
+            this.repaint();
+        }
+
+        public void setCardCount(int[] cardCount) {
+            this.cardCount = cardCount;
 
             this.repaint();
         }

@@ -90,36 +90,6 @@ public class FormGame {
                 e.printStackTrace();
                 System.exit(-1);
             }
-
-            // FIXME: Test code
-//            this.userIndex = 1;
-            //this.userTurnIndex = 0;
-
-//            this.usernames[0] = "danny";
-//            this.usernames[1] = "illya1";
-//            this.usernames[2] = "asdjkasjadlk";
-//            this.usernames[3] = "illya2514";
-
-//            this.cardCount[0] = 5;
-//            this.cardCount[1] = 7;
-//            this.cardCount[2] = 3;
-//            this.cardCount[3] = 15;
-
-            // this.centerCard = new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR);
-
-//            this.cards = new Card[]{
-//                    new Card(UnoColor.BLACK, UnoRank.WILD_DRAW_FOUR),
-//                    new Card(UnoColor.BLUE, UnoRank.ZERO),
-//                    new Card(UnoColor.GREEN, UnoRank.FOUR),
-//                    new Card(UnoColor.YELLOW, UnoRank.FIVE),
-//                    new Card(UnoColor.YELLOW, UnoRank.DRAW_TWO),
-//                    new Card(UnoColor.RED, UnoRank.REVERSE),
-//                    new Card(UnoColor.GREEN, UnoRank.ONE),
-//                    new Card(UnoColor.GREEN, UnoRank.THREE),
-//                    new Card(UnoColor.GREEN, UnoRank.DRAW_TWO),
-//                    new Card(UnoColor.BLACK, UnoRank.WILD),
-//            };
-            // FIXME: Test code end
         }
 
         @Override

@@ -20,7 +20,7 @@ public class Client {
     public static void main(String[] args) {
         Client client = null;
         try {
-            client = new Client("127.0.0.1", 25560);
+            client = new Client(args[0], 25560);
             client.run();
         } catch (Exception e) {
             e.printStackTrace();

@@ -20,6 +20,7 @@ jar {
         attributes 'Main-Class': 'club.dannyserver.uno.client.Client'
     }
     archiveName = 'UnoClient.jar'
+    from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 task serverJar(type: Jar) {
@@ -28,6 +29,7 @@ task serverJar(type: Jar) {
         attributes 'Main-Class': 'club.dannyserver.uno.server.Server'
     }
     archiveName = 'UnoServer.jar'
+    from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 assemble.dependsOn(serverJar)
 

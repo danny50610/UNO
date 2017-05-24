@@ -57,7 +57,6 @@ public class Server {
         System.out.println("Server started...");
         while (true) {
             IJob job = queue.take();
-            System.out.println("Run a runnable");
             job.run(this);
         }
     }

@@ -6,6 +6,7 @@ import club.dannyserver.uno.common.packet.PacketManager;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class SocketReadHandler implements Runnable {
 
@@ -25,7 +26,7 @@ public class SocketReadHandler implements Runnable {
 
     @Override
     public void run() {
-        DataInputStream dataInputStream;
+        DataInputStream dataInputStream = null;
         try {
             dataInputStream = new DataInputStream(socket.getInputStream());
 
@@ -41,13 +42,23 @@ public class SocketReadHandler implements Runnable {
 
                 this.server.addJob(server -> packet.serverHandler(server, connectId));
             }
-        } catch (IOException e) {
+        } catch (SocketException e) {
+            System.out.println(e.getMessage() + ". " + socket);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // TODO: dataInputStream close
+        finally {
+            if (dataInputStream != null) {
+                try {
+                    dataInputStream.close();
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         // TODO: 斷線處理
-        System.out.println("Connect Closed.");
+
     }
 }

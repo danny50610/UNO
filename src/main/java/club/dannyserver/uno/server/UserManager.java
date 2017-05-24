@@ -61,6 +61,10 @@ public class UserManager {
             return new PacketRegisterResult("Username 只能包含英文或數字");
         }
 
+        if (password.length() < 8) {
+            return new PacketRegisterResult("Password 長度必須 >= 8");
+        }
+
         user = new User(username, BCrypt.hashpw(password, BCrypt.gensalt()));
         id2User.put(USER_ID++, user);
 

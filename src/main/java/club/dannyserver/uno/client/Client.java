@@ -4,18 +4,13 @@ package club.dannyserver.uno.client;
 import club.dannyserver.uno.client.form.FormGame;
 import club.dannyserver.uno.client.form.FormLogin;
 import club.dannyserver.uno.client.form.FormRegister;
-import club.dannyserver.uno.common.UnoColor;
 import club.dannyserver.uno.common.packet.IPacket;
-import club.dannyserver.uno.common.packet.PacketLogin;
-import club.dannyserver.uno.common.packet.PacketPlayCard;
-import club.dannyserver.uno.common.packet.PacketRegister;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import javax.swing.*;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
 
 public class Client {
 

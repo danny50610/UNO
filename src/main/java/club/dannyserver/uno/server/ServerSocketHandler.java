@@ -1,13 +1,8 @@
 package club.dannyserver.uno.server;
 
-import club.dannyserver.uno.common.User;
-
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLSocket;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Queue;
 
 public class ServerSocketHandler implements Runnable {
 

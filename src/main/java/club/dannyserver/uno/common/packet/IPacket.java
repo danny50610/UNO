@@ -1,7 +1,6 @@
 package club.dannyserver.uno.common.packet;
 
 import club.dannyserver.uno.client.Client;
-import club.dannyserver.uno.common.User;
 import club.dannyserver.uno.server.Server;
 
 import java.io.DataInputStream;

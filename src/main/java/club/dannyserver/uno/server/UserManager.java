@@ -4,6 +4,7 @@ import club.dannyserver.uno.common.User;
 import club.dannyserver.uno.common.packet.IPacket;
 import club.dannyserver.uno.common.packet.PacketLoginResult;
 import club.dannyserver.uno.common.packet.PacketRegisterResult;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -69,7 +70,7 @@ public class UserManager {
             return new PacketRegisterResult(username + "已被使用");
         }
 
-        user = new User(username, password);
+        user = new User(username, BCrypt.hashpw(password, BCrypt.gensalt()));
         id2User.put(USER_ID++, user);
 
         saveUserList();
@@ -94,7 +95,7 @@ public class UserManager {
     private void saveUserList() {
         List<String> lines = new ArrayList<>();
         for (User user : id2User.values()) {
-            lines.add(String.format("%s,%s", user.username, user.password));
+            lines.add(String.format("%s,%s", user.username, user.passwordHashed));
         }
 
         Path file = Paths.get(userFilename);

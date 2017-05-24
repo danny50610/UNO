@@ -1,5 +1,7 @@
 package club.dannyserver.uno.common;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,19 +12,19 @@ public class User {
 
     public String username;
 
-    public String password;
+    public String passwordHashed;
 
     public Room room;
 
     // 手牌
     public List<Card> cards = new ArrayList<>();
 
-    public User(String username, String password) {
+    public User(String username, String passwordHashed) {
         this.username = username;
-        this.password = password;
+        this.passwordHashed = passwordHashed;
     }
 
     public boolean login(String password) {
-        return this.password.equals(password);
+        return BCrypt.checkpw(password, passwordHashed);
     }
 }

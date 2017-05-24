@@ -10,6 +10,8 @@ import club.dannyserver.uno.common.packet.PacketLogin;
 import club.dannyserver.uno.common.packet.PacketPlayCard;
 import club.dannyserver.uno.common.packet.PacketRegister;
 
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import javax.swing.*;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -32,7 +34,7 @@ public class Client {
         }
     }
 
-    private final Socket socket;
+    private final SSLSocket socket;
     private final DataOutputStream dataOutputStream;
 
     private JFrame activeFrame;
@@ -52,7 +54,10 @@ public class Client {
     }
 
     public Client(String ip, int port) throws Exception {
-        this.socket = new Socket(ip, port);
+        SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        this.socket = (SSLSocket) sslsocketfactory.createSocket(ip, port);
+        this.socket.setEnabledCipherSuites(this.socket.getSupportedCipherSuites());
+
         this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
         ClientSocketReadHandler clientSocketReadHandler = new ClientSocketReadHandler(this, socket);
         new Thread(clientSocketReadHandler, "ClientSocketReadHandler").start();

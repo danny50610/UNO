@@ -2,6 +2,8 @@ package club.dannyserver.uno.server;
 
 import club.dannyserver.uno.common.packet.IPacket;
 
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -29,7 +31,7 @@ public class Server {
         }
     }
 
-    private final ServerSocket serverSocket;
+    private final SSLServerSocket serverSocket;
 
     private final BlockingQueue<IJob> queue = new LinkedBlockingQueue<>();
 
@@ -40,7 +42,8 @@ public class Server {
     public Map<Integer, Socket> connectId2Socket = new HashMap<>();
 
     public Server(int port) throws Exception {
-        this.serverSocket = new ServerSocket(port);
+        SSLServerSocketFactory sslserversocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+        this.serverSocket = (SSLServerSocket) sslserversocketfactory.createServerSocket(port);
 
         Files.createDirectories(Paths.get("data"));
 

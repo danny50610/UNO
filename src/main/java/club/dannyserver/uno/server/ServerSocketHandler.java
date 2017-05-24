@@ -2,6 +2,8 @@ package club.dannyserver.uno.server;
 
 import club.dannyserver.uno.common.User;
 
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,9 +15,9 @@ public class ServerSocketHandler implements Runnable {
 
     private final Server server;
 
-    private final ServerSocket serverSocket;
+    private final SSLServerSocket serverSocket;
 
-    public ServerSocketHandler(Server server, ServerSocket serverSocket) {
+    public ServerSocketHandler(Server server, SSLServerSocket serverSocket) {
         this.server = server;
         this.serverSocket = serverSocket;
     }
@@ -24,7 +26,9 @@ public class ServerSocketHandler implements Runnable {
     public void run() {
         try {
             while (true) {
-                Socket socket = this.serverSocket.accept();
+                SSLSocket socket = (SSLSocket) this.serverSocket.accept();
+                socket.setEnabledCipherSuites(socket.getSupportedCipherSuites());
+
                 server.addJob(server -> {
                     System.out.println("AcceptHandler: " + socket);
 

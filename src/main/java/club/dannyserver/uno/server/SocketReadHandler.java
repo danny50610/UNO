@@ -1,5 +1,6 @@
 package club.dannyserver.uno.server;
 
+import club.dannyserver.uno.common.User;
 import club.dannyserver.uno.common.packet.IPacket;
 import club.dannyserver.uno.common.packet.PacketManager;
 
@@ -58,7 +59,13 @@ public class SocketReadHandler implements Runnable {
             }
         }
 
-        // TODO: 斷線處理
+        // 斷線處理
+        this.server.addJob(server -> {
+            User user = server.userManager.getUser(connectId);
 
+            if (user != null) {
+                server.roomManager.handleUserLeave(user);
+            }
+        });
     }
 }

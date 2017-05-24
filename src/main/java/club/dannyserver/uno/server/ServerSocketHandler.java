@@ -34,6 +34,7 @@ public class ServerSocketHandler implements Runnable {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(-1);
         }
 
     }

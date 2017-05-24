@@ -23,6 +23,7 @@ public abstract class PacketManager {
         packetMap.put(70, PacketUpdateRoomInfo.class);
         packetMap.put(71, PacketGameStart.class);
         packetMap.put(72, PacketWinResult.class);
+        packetMap.put(73, PacketUserLeave.class);
     }
 
     public static IPacket getPacket(int packetId) {

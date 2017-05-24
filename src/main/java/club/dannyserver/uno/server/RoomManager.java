@@ -23,6 +23,12 @@ public class RoomManager {
         room.addUser(user);
     }
 
+    public void handleUserLeave(User user) {
+        if (user.room == null) return;
+
+        user.room.handleUserLeave(user);
+    }
+
     private Room getLastRoom() {
         Room result;
 

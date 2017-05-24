@@ -43,6 +43,14 @@ public class Room {
         }
     }
 
+    public void handleUserLeave(User leaveUser) {
+        for (int i = 0; i < userCount; i++) {
+            if (leaveUser.username.equals(users[i].username)) continue;
+
+            server.sendPacket(users[i].connectId, new PacketUserLeave(leaveUser.username));
+        }
+    }
+
     private void initGame() {
         userTurnIndex = 0;
         turnVector = 1;
@@ -223,6 +231,7 @@ public class Room {
 
             for (int i = 0; i < MAX_USER; i++) {
                 server.sendPacket(users[i].connectId, new PacketWinResult(user.username + " Win."));
+                users[i].room = null;
             }
 
             return;

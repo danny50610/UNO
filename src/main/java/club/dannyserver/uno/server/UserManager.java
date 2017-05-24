@@ -6,6 +6,7 @@ import club.dannyserver.uno.common.packet.PacketLoginResult;
 import club.dannyserver.uno.common.packet.PacketRegisterResult;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -27,23 +28,9 @@ public class UserManager {
     private Map<Integer, Integer> connectId2Id = new HashMap<>();
 
     public UserManager(String userFilename) {
-        // load user
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(userFilename), StandardCharsets.UTF_8);
+        this.userFilename = userFilename;
 
-            for (String line : lines) {
-                // id,username,password
-                String[] token = line.split(",");
-
-                User user = new User(token[0], token[1]);
-                id2User.put(USER_ID++, user);
-            }
-
-            this.userFilename = userFilename;
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
+        loadUserList();
     }
 
     public IPacket login(int connectId, String username, String password) {
@@ -90,6 +77,31 @@ public class UserManager {
         }
 
         return -1;
+    }
+
+    private void loadUserList() {
+        File f = new File(userFilename);
+        if (!f.exists() || f.isDirectory()) {
+            System.out.println(userFilename + " 不存在. 跳過玩家資料讀取");
+            return;
+        }
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(userFilename), StandardCharsets.UTF_8);
+
+            for (String line : lines) {
+                // username,passwordHashed
+                String[] token = line.split(",");
+
+                User user = new User(token[0], token[1]);
+                id2User.put(USER_ID++, user);
+            }
+
+            this.userFilename = userFilename;
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 
     private void saveUserList() {

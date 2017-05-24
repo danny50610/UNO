@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -33,15 +35,19 @@ public class Server {
 
     private final BlockingQueue<IJob> queue = new LinkedBlockingQueue<>();
 
-    public final UserManager userManager = new UserManager("user.txt");
+    public final UserManager userManager;
 
-    public final RoomManager roomManager = new RoomManager();
+    public final RoomManager roomManager;
 
     public Map<Integer, Socket> connectId2Socket = new HashMap<>();
 
     public Server(int port) throws Exception {
         this.serverSocket = new ServerSocket(port);
 
+        Files.createDirectories(Paths.get("data"));
+
+        userManager = new UserManager("data/user.txt");
+        roomManager = new RoomManager();
         roomManager.setServer(this);
     }
 

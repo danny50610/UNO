@@ -70,7 +70,7 @@ public class UserManager {
 
         saveUserList();
 
-        return new PacketRegisterResult("註冊成功，請回登入頁登入");
+        return new PacketRegisterResult("註冊成功，請到登入頁登入");
     }
 
     public User getUser(int connectId) {

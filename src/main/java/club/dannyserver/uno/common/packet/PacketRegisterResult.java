@@ -40,9 +40,13 @@ public class PacketRegisterResult implements IPacket {
                 JOptionPane.showMessageDialog(
                         client.getActiveFrame(),
                         message,
-                        "test",
+                        "Message",
                         JOptionPane.INFORMATION_MESSAGE
                 );
+
+                if (message.equals("註冊成功，請到登入頁登入")) {
+                    client.switchToLoginFrame();
+                }
             }
         });
     }

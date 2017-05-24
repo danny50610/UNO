@@ -22,6 +22,15 @@ jar {
     archiveName = 'UnoClient.jar'
 }
 
+task serverJar(type: Jar) {
+    from sourceSets.main.output
+    manifest {
+        attributes 'Main-Class': 'club.dannyserver.uno.server.Server'
+    }
+    archiveName = 'UnoServer.jar'
+}
+assemble.dependsOn(serverJar)
+
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }

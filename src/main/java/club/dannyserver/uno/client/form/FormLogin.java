@@ -1,6 +1,7 @@
 package club.dannyserver.uno.client.form;
 
 import club.dannyserver.uno.client.Client;
+import club.dannyserver.uno.common.packet.PacketLogin;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -28,7 +29,9 @@ public class FormLogin {
     private void addListener() {
         this.registerButton.addActionListener(e -> client.switchToRegisterFrame());
         this.loginButton.addActionListener(
-                e -> client.sendLogin(usernameTextField.getText(), String.valueOf(passwordField.getPassword()))
+                e -> client.sendPacket(
+                        new PacketLogin(usernameTextField.getText(), String.valueOf(passwordField.getPassword()))
+                )
         );
     }
 

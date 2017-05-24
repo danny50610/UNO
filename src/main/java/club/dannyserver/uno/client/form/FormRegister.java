@@ -1,6 +1,7 @@
 package club.dannyserver.uno.client.form;
 
 import club.dannyserver.uno.client.Client;
+import club.dannyserver.uno.common.packet.PacketRegister;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -32,7 +33,7 @@ public class FormRegister {
             String passwordAgain = String.valueOf(passwordAgainField.getPassword());
 
             if (password.equals(passwordAgain)) {
-                client.sendRegister(usernameTextField.getText(), password);
+                client.sendPacket(new PacketRegister(usernameTextField.getText(), password));
             }
             else {
                 JOptionPane.showMessageDialog(

@@ -3,6 +3,7 @@ package club.dannyserver.uno.client.form;
 import club.dannyserver.uno.client.Client;
 import club.dannyserver.uno.common.Card;
 import club.dannyserver.uno.common.UnoColor;
+import club.dannyserver.uno.common.packet.PacketPlayCard;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.imageio.ImageIO;
@@ -337,7 +338,7 @@ public class FormGame {
 
                         isPickColorMode = false;
                         this.repaint();
-                        client.sendIndex(selectIndex, pickColor);
+                        client.sendPacket(new PacketPlayCard(selectIndex, pickColor));
                     }
                 }
                 else {
@@ -355,7 +356,7 @@ public class FormGame {
                                 }
                                 pickColor = null;
 
-                                client.sendIndex(selectIndex, pickColor);
+                                client.sendPacket(new PacketPlayCard(selectIndex, pickColor));
                             }
                         }
                     }

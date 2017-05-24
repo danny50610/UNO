@@ -115,9 +115,7 @@ public class Client {
         this.activeFrame.setVisible(true);
     }
 
-    public void sendLogin(String username, String password) {
-        IPacket packet = new PacketLogin(username, password);
-
+    public void sendPacket(IPacket packet) {
         try {
             packet.writeToStream(dataOutputStream);
         } catch (IOException e) {
@@ -125,23 +123,4 @@ public class Client {
         }
     }
 
-    public void sendRegister(String username, String password) {
-        IPacket packet = new PacketRegister(username, password);
-
-        try {
-            packet.writeToStream(dataOutputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sendIndex(int index, UnoColor pickColor) {
-        IPacket packet = new PacketPlayCard(index, pickColor);
-
-        try {
-            packet.writeToStream(dataOutputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

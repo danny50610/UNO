@@ -57,6 +57,10 @@ public class UserManager {
             return new PacketRegisterResult(username + "已被使用");
         }
 
+        if (!username.matches("[a-zA-Z0-9]+")) {
+            return new PacketRegisterResult("Username 只能包含英文或數字");
+        }
+
         user = new User(username, BCrypt.hashpw(password, BCrypt.gensalt()));
         id2User.put(USER_ID++, user);
 

@@ -10,5 +10,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: :forms_rt:2017.1.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.mindrot:jbcrypt:0.3m" level="project" />
   </component>
 </module>

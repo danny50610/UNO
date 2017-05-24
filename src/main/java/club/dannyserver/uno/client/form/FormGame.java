@@ -120,6 +120,17 @@ public class FormGame {
             this.addMouseListener(this);
         }
 
+        public void resetGame() {
+            userIndex = 0;
+            cardCount = new int[4];
+            centerCard = null;
+            usernames = new String[4];
+            cards.clear();
+            userTurnIndex = -1;
+            turnVector = 1;
+            isGameStart = false;
+        }
+
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);

@@ -46,6 +46,7 @@ public class Room {
         for (int i = 0; i < userCount; i++) {
             if (leaveUser.username.equals(users[i].username)) continue;
 
+            users[i].room = null;
             server.sendPacket(users[i].connectId, new PacketUserLeave(leaveUser.username));
         }
     }
@@ -232,6 +233,8 @@ public class Room {
                 server.sendPacket(users[i].connectId, new PacketWinResult(user.username + " Win."));
                 users[i].room = null;
             }
+
+            server.roomManager.rooms.remove(this);
 
             return;
         }

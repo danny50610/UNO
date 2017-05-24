@@ -20,13 +20,18 @@ public class RoomManager {
     public void addUser(User user) {
         Room room = getLastRoom();
 
+        System.out.println(String.format("Add %s into room: %s", user.username, room));
         room.addUser(user);
     }
 
     public void handleUserLeave(User user) {
         if (user.room == null) return;
 
-        user.room.handleUserLeave(user);
+        Room room = user.room;
+        room.handleUserLeave(user);
+
+        System.out.println("Remove room: " + room);
+        rooms.remove(room);
     }
 
     private Room getLastRoom() {

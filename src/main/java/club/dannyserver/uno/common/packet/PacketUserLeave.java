@@ -2,6 +2,7 @@ package club.dannyserver.uno.common.packet;
 
 
 import club.dannyserver.uno.client.Client;
+import club.dannyserver.uno.client.form.FormGame;
 import club.dannyserver.uno.server.Server;
 
 import javax.swing.*;
@@ -50,7 +51,11 @@ public class PacketUserLeave implements IPacket {
                         JOptionPane.INFORMATION_MESSAGE
                 );
 
-                // TODO: 發送要求重新加入
+                FormGame.PanelGame panelGame = (FormGame.PanelGame) client.getGameFrame().getContentPane();
+                panelGame.resetGame();
+
+                // 發送要求重新加入
+                client.sendPacket(new PacketReAddRoom());
             }
         });
     }

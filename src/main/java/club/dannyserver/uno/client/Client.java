@@ -18,9 +18,14 @@ import java.net.Socket;
 public class Client {
 
     public static void main(String[] args) {
+        String serverIp = "uno.dannyserver.club";
+        if (args.length > 0) {
+            serverIp = args[0];
+        }
+
         Client client = null;
         try {
-            client = new Client(args[0], 25560);
+            client = new Client(serverIp, 25560);
             client.run();
         } catch (Exception e) {
             e.printStackTrace();
